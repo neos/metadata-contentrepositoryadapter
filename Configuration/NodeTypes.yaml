@@ -1,0 +1,30 @@
+'Neos.MetaData:Asset':
+  abstract: true
+  properties:
+    originalFileName:
+      type: string
+      mapping: '${asset.fileName}'
+
+'Neos.MetaData:Iptc':
+  abstract: true
+  properties:
+    creationDate:
+      type: DateTime
+      mapping: '${iptc.creationDate}'
+    authorByline:
+      type: string
+      mapping: '${iptc.authorByLine}'
+
+'Neos.MetaData:Exif':
+  abstract: true
+  properties:
+    model:
+      type: string
+      mapping: '${exif.Model}'
+
+
+'Neos.MetaData:Image':
+  superTypes:
+    'Neos.MetaData:Asset': true
+    'Neos.MetaData:Exif': true
+    'Neos.MetaData:Iptc': true

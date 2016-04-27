@@ -1,0 +1,1 @@
+The Content Repository Adapter enables storing of meta data into the Neos Content Repository.

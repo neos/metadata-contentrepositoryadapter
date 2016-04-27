@@ -1,0 +1,20 @@
+{
+    "description": "Maps asset meta data to CR nodes",
+    "type": "neos-package",
+    "require": {
+        "typo3/flow": "*",
+        "neos/metadata": "*",
+        "typo3/typo3cr": "*"
+    },
+    "name": "neos/metadata-contentrepositoryadapter",
+    "autoload": {
+        "psr-0": {
+            "Neos\\MetaData\\ContentRepositoryAdapter": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "Neos.MetaData.ContentRepositoryAdapter"
+        }
+    }
+}
