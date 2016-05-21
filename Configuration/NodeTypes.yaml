@@ -3,28 +3,128 @@
   properties:
     originalFileName:
       type: string
-      mapping: '${asset.fileName}'
+      mapping: '${asset.FileName}'
+    title:
+      type: string
+      mapping: '${asset.Title}'
+    caption:
+      type: string
+      mapping: '${asset.Caption}'
 
 'Neos.MetaData:Iptc':
   abstract: true
   properties:
     creationDate:
       type: DateTime
-      mapping: '${iptc.creationDate}'
+      mapping: '${iptc.CreationDate}'
     authorByline:
       type: string
       mapping: '${iptc.authorByLine}'
+    city:
+      type: string
+      mapping: '${iptc.City}'
+      help:
+        message: Name of the city of a location.
+    country:
+      type: string
+      mapping: '${iptc.Country}'
+      help:
+        message: Name of the country of a location.
+    description:
+      type: string
+      mapping: '${iptc.Description}'
+      help:
+        message: A textual description, including captions, of the item's content, particularly used where the object is not text.
+    keywords:
+      type: array
+      mapping: '${iptc.Keywords}'
+      help:
+        message: Keywords to express the subject of the content. Keywords may be free text and don't have to be taken from a controlled vocabulary.
+    state:
+      type: string
+      mapping: '${iptc.State}'
+      help:
+        message: The name of a subregion of a country - a province or state - of a location.
+    subLocation:
+      type: string
+      mapping: '${iptc.SubLocation}'
+      help:
+        message: Name of a sublocation. This sublocation name could either be the name of a sublocation to a city or the name of a well known location or (natural) monument outside a city.
+    title:
+      type: string
+      mapping: '${iptc.Title}'
+      help:
+        message: A shorthand reference for the item. Title provides a short human readable name which can be a text and/or numeric reference.
 
 'Neos.MetaData:Exif':
   abstract: true
   properties:
+    aperture:
+      type: float
+      mapping: '${exif.Aperture}'
+      help:
+        message: The lens aperture.
+    artist:
+      type: string
+      mapping: '${exif.Artist}'
+    colorSpace:
+      type: string
+      mapping: '${exif.ColorSpace}'
+      help:
+        message: The color space information tag.
+    exposureTime:
+      type: integer
+      mapping: '${exif.ExposureTime}'
+      help:
+        message: Exposure time, given in seconds.
+    focalLength:
+      type: integer
+      mapping: '${exif.FocalLength}'
+      help:
+        message: The actual focal length of the lens, in mm.
+    gpsLatitude:
+      type: float
+      mapping: '${exif.GPSLatitude}'
+      help:
+        message: The GPS latitude given as a WGS84 float number.
+    gpsLongitude:
+      type: float
+      mapping: '${exif.FocalLength}'
+      help:
+        message: The GPS longitude given as a WGS84 float number.
+    isoSpeedRatings:
+      type: integer
+      mapping: '${exif.ISOSpeedRatings}'
+      help:
+        message: Indicates the ISO Speed and ISO Latitude of the camera or input device as specified in ISO 12232.
+    imageDescription:
+      type: string
+      mapping: '${exif.ImageDescription}'
+      help:
+        message: A character string giving the title of the image.
+    make:
+      type: string
+      mapping: '${exif.Make}'
+      help:
+        message: The manufacturer of the recording equipment.
     model:
       type: string
       mapping: '${exif.Model}'
-
+      help:
+        message: The model name or model number of the equipment.
 
 'Neos.MetaData:Image':
   superTypes:
     'Neos.MetaData:Asset': true
     'Neos.MetaData:Exif': true
     'Neos.MetaData:Iptc': true
+  properties:
+    authorByline:
+      type: string
+      mapping: '${iptc.AuthorByLine || exif.Artist}'
+    description:
+      type: string
+      mapping: '${asset.Caption || iptc.Description}'
+    title:
+      type: string
+      mapping: '${asset.Title || iptc.Title || exif.imageDescription}'
