@@ -1,7 +1,19 @@
 <?php
 namespace Neos\MetaData\ContentRepositoryAdapter\Domain\Repository;
 
+/*
+ * This file is part of the Neos.MetaData.ContentRepository package.
+ *
+ * (c) Contributors of the Neos Project - www.neos.io
+ *
+ * This package is Open Source Software. For the full copyright and license
+ * information, please view the LICENSE file which was distributed with this
+ * source code.
+ */
+
+use TYPO3\Media\Domain\Model\Asset;
 use TYPO3\TYPO3CR\Domain\Model\NodeData;
+use TYPO3\TYPO3CR\Domain\Model\Workspace;
 use TYPO3\TYPO3CR\Domain\Repository\NodeDataRepository;
 use TYPO3\TYPO3CR\Domain\Service\Context;
 use TYPO3\Flow\Annotations as Flow;
@@ -19,13 +31,19 @@ class MetaDataRepository extends NodeDataRepository
 
     /**
      * @param $assetIdentifier
-     * @param Context $context
+     * @param Workspace $workspace
      * @return NodeData
      */
-    public function findOneByAssetIdentifier($assetIdentifier, Context $context)
+    public function findOneByAssetIdentifier($assetIdentifier, Workspace $workspace)
     {
-        $assetNodeData = $this->findOneByPath(sprintf('/%s/%s', self::METADATA_ROOT_NODE_NAME, $assetIdentifier), $context->getWorkspace());
+        $assetNodeData = $this->findOneByPath(sprintf('/%s/%s', self::METADATA_ROOT_NODE_NAME, $assetIdentifier), $workspace);
         return $assetNodeData;
     }
 
+    
+    public function removeByAsset(Asset $asset)
+    {
+        $assetNodeData = $this->findOneByAssetIdentifier($asset->getIdentifier(), new Context());
+        $this->remove($assetNodeData);
+    }
 }

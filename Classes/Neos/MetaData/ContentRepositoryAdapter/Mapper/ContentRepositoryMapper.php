@@ -1,15 +1,23 @@
 <?php
 namespace Neos\MetaData\ContentRepositoryAdapter\Mapper;
 
+/*
+ * This file is part of the Neos.MetaData.ContentRepository package.
+ *
+ * (c) Contributors of the Neos Project - www.neos.io
+ *
+ * This package is Open Source Software. For the full copyright and license
+ * information, please view the LICENSE file which was distributed with this
+ * source code.
+ */
+
 use Neos\MetaData\ContentRepositoryAdapter\Domain\Repository\MetaDataRepository;
 use Neos\MetaData\Domain\Collection\MetaDataCollection;
 use Neos\MetaData\Domain\Dto;
 use Neos\MetaData\Mapper\MetaDataMapperInterface;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Neos\Domain\Service\NodeSearchService;
-use TYPO3\TYPO3CR\Domain\Factory\NodeFactory;
 use TYPO3\TYPO3CR\Domain\Model\AbstractNodeData;
-use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 use TYPO3\TYPO3CR\Domain\Model\NodeTemplate;
 use TYPO3\TYPO3CR\Domain\Model\NodeType;
 use TYPO3\TYPO3CR\Domain\Service\ContextFactoryInterface;
@@ -46,6 +54,12 @@ class ContentRepositoryMapper implements MetaDataMapperInterface
     protected $nodeSearchService;
 
     /**
+     * @Flow\Inject
+     * @var \Neos\MetaData\ContentRepositoryAdapter\Service\NodeService
+     */
+    protected $nodeService;
+    
+    /**
      * @var \TYPO3\TYPO3CR\Domain\Service\Context
      */
     protected $context;
@@ -56,22 +70,10 @@ class ContentRepositoryMapper implements MetaDataMapperInterface
      */
     protected $contextFactory;
 
-    /**
-     * @Flow\Inject
-     * @var NodeFactory
-     */
-    protected $nodeFactory;
-
-    /**
-     * @var NodeInterface
-     */
-    protected $rootNode;
-
 
     public function initializeObject()
     {
         $this->context = $this->contextFactory->create(['workspaceName' => 'live']);
-        $this->rootNode = $this->context->getRootNode();
     }
 
     /**
@@ -86,13 +88,13 @@ class ContentRepositoryMapper implements MetaDataMapperInterface
         $nodeType = $this->nodeTypeManager->getNodeType('Neos.MetaData:Image');
         $asset = $metaDataCollection->get('asset');
 
-        $assetNodeData = $this->metaDataRepository->findOneByAssetIdentifier($asset->getIdentifier(), $this->context);
+        $assetNodeData = $this->metaDataRepository->findOneByAssetIdentifier($asset->getIdentifier(), $this->context->getWorkspace());
         if ($assetNodeData === null) {
             $assetNodeDataTemplate = $this->createAssetNodeTemplate($asset, $nodeType);
-            $this->mapMetaDataToNdoeData($assetNodeDataTemplate, $nodeType, $metaDataCollection);
-            $this->findOrCreateMetaDataRootNode()->createNodeFromTemplate($assetNodeDataTemplate);
+            $this->mapMetaDataToNodeData($assetNodeDataTemplate, $nodeType, $metaDataCollection);
+            $this->nodeService->findOrCreateMetaDataRootNode($this->context)->createNodeFromTemplate($assetNodeDataTemplate);
         } else {
-            $this->mapMetaDataToNdoeData($assetNodeData, $nodeType, $metaDataCollection);
+            $this->mapMetaDataToNodeData($assetNodeData, $nodeType, $metaDataCollection);
             $this->metaDataRepository->update($assetNodeData);
         }
     }
@@ -103,7 +105,7 @@ class ContentRepositoryMapper implements MetaDataMapperInterface
      * @param MetaDataCollection $metaDataCollection
      * @throws \TYPO3\Eel\Exception
      */
-    protected function mapMetaDataToNdoeData(AbstractNodeData $nodeData, NodeType $nodeType, MetaDataCollection $metaDataCollection)
+    protected function mapMetaDataToNodeData(AbstractNodeData $nodeData, NodeType $nodeType, MetaDataCollection $metaDataCollection)
     {
         foreach ($nodeType->getProperties() as $propertyName => $propertyConfiguration) {
             if (isset($propertyConfiguration['mapping'])) {
@@ -111,26 +113,7 @@ class ContentRepositoryMapper implements MetaDataMapperInterface
             }
         }
     }
-
-    /**
-     * @return NodeInterface
-     * @throws NodeTypeNotFoundException
-     */
-    protected function findOrCreateMetaDataRootNode()
-    {
-        $metaDataRootNodeData = $this->metaDataRepository->findOneByPath('/' . MetaDataRepository::METADATA_ROOT_NODE_NAME, $this->context->getWorkspace());
-
-        if ($metaDataRootNodeData !== null) {
-            $metaDataRootNode = $this->nodeFactory->createFromNodeData($metaDataRootNodeData, $this->context);
-            return $metaDataRootNode;
-        }
-
-        $nodeTemplate = new NodeTemplate();
-        $nodeTemplate->setNodeType($this->nodeTypeManager->getNodeType('unstructured'));
-        $nodeTemplate->setName(MetaDataRepository::METADATA_ROOT_NODE_NAME);
-        return $this->rootNode->createNodeFromTemplate($nodeTemplate);
-    }
-
+    
     /**
      * @param Dto\Asset $asset
      * @param NodeType $nodeType
