@@ -8,8 +8,8 @@
     },
     "name": "neos/metadata-contentrepositoryadapter",
     "autoload": {
-        "psr-0": {
-            "Neos\\MetaData\\ContentRepositoryAdapter": "Classes/"
+        "psr-4": {
+            "Neos\\MetaData\\ContentRepositoryAdapter\\": "Classes"
         }
     },
     "extra": {

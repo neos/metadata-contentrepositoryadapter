@@ -62,7 +62,7 @@ class GetAssetsOperation extends AbstractOperation {
     public function canEvaluate($context) {
 
         if (isset($context[0]) && ($context[0] instanceof NodeInterface) || is_array($context[0])) {
-            $this->metaDataNodes = is_array($context[0]) ? $context[0] : [$context[0]];
+            $this->metaDataNodes = is_array($context) ? $context : [$context];
             return true;
         }
         return false;
