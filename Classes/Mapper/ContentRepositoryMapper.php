@@ -36,6 +36,12 @@ class ContentRepositoryMapper implements MetaDataMapperInterface
     protected $eelEvaluator;
 
     /**
+     * The default context variables available inside Eel
+     * @var array
+     */
+    protected $defaultContextVariables;
+    
+    /**
      * @Flow\Inject
      * @var MetaDataRepository
      */
@@ -69,6 +75,12 @@ class ContentRepositoryMapper implements MetaDataMapperInterface
      * @var ContextFactoryInterface
      */
     protected $contextFactory;
+
+    /**
+     * @Flow\InjectConfiguration(package="Neos.MetaData.ContentRepositoryAdapter", path="mapping")
+     * @var array
+     */
+    protected $settings;
 
 
     public function initializeObject()
@@ -107,9 +119,17 @@ class ContentRepositoryMapper implements MetaDataMapperInterface
      */
     protected function mapMetaDataToNodeData(AbstractNodeData $nodeData, NodeType $nodeType, MetaDataCollection $metaDataCollection)
     {
+
+        if ($this->defaultContextVariables === NULL) {
+            $this->defaultContextVariables = EelUtility::getDefaultContextVariables($this->settings['defaultEelContext']);
+        }
+        
         foreach ($nodeType->getProperties() as $propertyName => $propertyConfiguration) {
+
+            $contextVariables = array_merge($this->defaultContextVariables, $metaDataCollection->toArray());
+
             if (isset($propertyConfiguration['mapping'])) {
-                $nodeData->setProperty($propertyName, EelUtility::evaluateEelExpression($propertyConfiguration['mapping'], $this->eelEvaluator, $metaDataCollection->toArray()));
+                $nodeData->setProperty($propertyName, EelUtility::evaluateEelExpression($propertyConfiguration['mapping'], $this->eelEvaluator, $contextVariables));
             }
         }
     }

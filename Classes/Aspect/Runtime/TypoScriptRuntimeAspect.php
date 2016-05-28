@@ -11,7 +11,9 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Aspect\Runtime;
  * source code.
  */
 
+use Neos\MetaData\ContentRepositoryAdapter\Domain\Repository\MetaDataRepository;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\AOP\JoinPointInterface;
 
 /**
  * @Flow\Aspect
@@ -25,11 +27,11 @@ class TypoScriptRuntimeAspect
     protected $nodeService;
 
     /**
-     * @param \TYPO3\Flow\AOP\JoinPointInterface $joinPoint
+     * @param JoinPointInterface $joinPoint
      * @Flow\After("method(TYPO3\TypoScript\Core\Runtime->pushContextArray())")
      * @return void
      */
-    public function extendContextWithMetaDataRootNode(\TYPO3\Flow\AOP\JoinPointInterface $joinPoint)
+    public function extendContextWithMetaDataRootNode(JoinPointInterface $joinPoint)
     {
         /** @var \TYPO3\TypoScript\Core\Runtime $runtime */
         $runtime = $joinPoint->getProxy();
@@ -42,7 +44,7 @@ class TypoScriptRuntimeAspect
 
             $metaDataRootNode = $this->nodeService->findOrCreateMetaDataRootNode($node->getContext());
 
-            $runtime->pushContext('meta', $metaDataRootNode);
+            $runtime->pushContext(MetaDataRepository::METADATA_ROOT_NODE_NAME, $metaDataRootNode);
         }
     }
 }

@@ -14,8 +14,11 @@
       type: string
       mapping: '${asset.Caption}'
     collections:
-      type: string
+      type: array
       mapping: '${asset.Collections}'
+    assetObject:
+      type: TYPO3\Media\Domain\Model\AssetInterface
+      mapping: '${asset.assetObject}'
 
 'Neos.MetaData:Iptc':
   abstract: true
@@ -125,6 +128,7 @@
     'Neos.MetaData:Exif': true
     'Neos.MetaData:Iptc': true
   properties:
+    artist: ~
     authorByline:
       type: string
       mapping: '${iptc.AuthorByLine || exif.Artist}'
