@@ -26,7 +26,7 @@ class MetaDataRepository extends NodeDataRepository
 
     const ENTITY_CLASSNAME = NodeData::class;
 
-    const METADATA_ROOT_NODE_NAME = 'meta';
+    const METADATA_ROOT_NODE_NAME = 'assets';
 
 
     /**
