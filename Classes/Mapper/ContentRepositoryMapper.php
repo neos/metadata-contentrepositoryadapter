@@ -16,6 +16,7 @@ use Neos\MetaData\Domain\Collection\MetaDataCollection;
 use Neos\MetaData\Domain\Dto;
 use Neos\MetaData\Mapper\MetaDataMapperInterface;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Media\Domain\Model\Asset;
 use TYPO3\Neos\Domain\Service\NodeSearchService;
 use TYPO3\TYPO3CR\Domain\Model\AbstractNodeData;
 use TYPO3\TYPO3CR\Domain\Model\NodeTemplate;
@@ -89,13 +90,13 @@ class ContentRepositoryMapper implements MetaDataMapperInterface
     }
 
     /**
-     * @param \TYPO3\Media\Domain\Model\Asset $asset
+     * @param Asset $asset
      * @param MetaDataCollection $metaDataCollection
      * @throws NodeTypeNotFoundException
      * @throws \TYPO3\Flow\Persistence\Exception\IllegalObjectTypeException
      * @return void
      */
-    public function mapMetaData(\TYPO3\Media\Domain\Model\Asset $asset, MetaDataCollection $metaDataCollection)
+    public function mapMetaData(Asset $asset, MetaDataCollection $metaDataCollection)
     {
         $nodeType = $this->nodeTypeManager->getNodeType('Neos.MetaData:Image');
         $asset = $metaDataCollection->get('asset');

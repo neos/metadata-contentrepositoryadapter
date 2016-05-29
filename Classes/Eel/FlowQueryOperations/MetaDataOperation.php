@@ -19,7 +19,8 @@ use TYPO3\Eel\FlowQuery\FlowQuery;
 /**
  * EEL operation to get the metaData of an image
  */
-class MetaDataOperation extends AbstractOperation {
+class MetaDataOperation extends AbstractOperation
+{
 
     /**
      * {@inheritdoc}
@@ -56,7 +57,7 @@ class MetaDataOperation extends AbstractOperation {
      * @var \TYPO3\TYPO3CR\Domain\Factory\NodeFactory
      */
     protected $nodeFactory;
-    
+
     /**
      * {@inheritdoc}
      *
@@ -65,9 +66,10 @@ class MetaDataOperation extends AbstractOperation {
      * @param mixed $context
      * @return boolean
      */
-    public function canEvaluate($context) {
+    public function canEvaluate($context)
+    {
         if (isset($context[0]) && ($context[0] instanceof NodeInterface)) {
-            $this->contextNode = $context[0]; 
+            $this->contextNode = $context[0];
             return true;
         }
         return false;
@@ -80,14 +82,15 @@ class MetaDataOperation extends AbstractOperation {
      * @param array $arguments the arguments for this operation
      * @return \DateTime
      */
-    public function evaluate(FlowQuery $flowQuery, array $arguments) {
+    public function evaluate(FlowQuery $flowQuery, array $arguments)
+    {
         $imagePropertyName = $arguments[0];
-        if($this->contextNode->hasProperty($imagePropertyName)) {
+        if ($this->contextNode->hasProperty($imagePropertyName)) {
 
-           $imageArray = $this->contextNode->getProperties($arguments[0]);
-           $image = $imageArray['image'];
+            $imageArray = $this->contextNode->getProperties($arguments[0]);
+            $image = $imageArray['image'];
 
-           $identifier = $image->getidentifier();
+            $identifier = $image->getidentifier();
 
             $nodeData = $this->metaDataRepository->findOneByAssetIdentifier($identifier, $this->contextNode->getContext()->getWorkspace());
             return $this->nodeFactory->createFromNodeData($nodeData, $this->contextNode->getContext());
