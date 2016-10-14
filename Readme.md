@@ -1,6 +1,6 @@
-# Neos Neos MetaData ContentRepositoryAdapter
+# Neos MetaData Content Repository Adapter
 
-This package handels the mapping of meta data DTOs to the Neos Content Repository.
+This package handles the mapping of meta data DTOs to the Neos Content Repository.
 
 **Note: This package is work in progress. The class structure and interfaces may change a lot over time. The package is not meant for productive use.**
 
@@ -13,8 +13,8 @@ It provides two main features:
 Get all images of an author:
 
 	collection = ${q(assets).children('[instanceof Neos.MetaData:Image][authorByline*="Daniel Lienert"]').get()}
-	
-Load the meta data of an asset node property - here of the property image:
+
+Load the meta data of an asset node property - here of the property "image":
 
 	prototype(TYPO3.Neos.NodeTypes:Image) {
 		metaData = ${q(node).metaData('image').properties}
