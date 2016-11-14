@@ -1,12 +1,17 @@
 {
+    "name": "neos/metadata-contentrepositoryadapter",
     "description": "Maps asset meta data to CR nodes",
     "type": "neos-package",
     "require": {
-        "typo3/flow": "*",
+        "php": "^5.3 || ^7",
         "neos/metadata": "*",
-        "typo3/typo3cr": "*"
+        "typo3/typo3cr": "*",
+        "typo3/typoscript": "*"
     },
-    "name": "neos/metadata-contentrepositoryadapter",
+    "suggest": {
+        "neos/metadata-extractor": "Extracts meta data from Assets"
+    },
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Neos\\MetaData\\ContentRepositoryAdapter\\": "Classes"

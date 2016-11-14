@@ -11,15 +11,15 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Domain\Repository;
  * source code.
  */
 
+use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Media\Domain\Model\Asset;
 use TYPO3\TYPO3CR\Domain\Model\NodeData;
 use TYPO3\TYPO3CR\Domain\Model\Workspace;
 use TYPO3\TYPO3CR\Domain\Repository\NodeDataRepository;
-use TYPO3\Flow\Annotations as Flow;
 
 /**
-* @Flow\Scope("singleton")
-*/
+ * @Flow\Scope("singleton")
+ */
 class MetaDataRepository extends NodeDataRepository
 {
     const ENTITY_CLASSNAME = NodeData::class;
@@ -27,14 +27,14 @@ class MetaDataRepository extends NodeDataRepository
     const METADATA_ROOT_NODE_NAME = 'assets';
 
     /**
-     * @param $assetIdentifier
+     * @param Asset $asset
      * @param Workspace $workspace
+     *
      * @return NodeData
      */
-    public function findOneByAssetIdentifier($assetIdentifier, Workspace $workspace)
+    public function findOneByAsset(Asset $asset, Workspace $workspace)
     {
-        $assetNodeData = $this->findOneByPath(sprintf('/%s/%s', self::METADATA_ROOT_NODE_NAME, $assetIdentifier), $workspace);
-        return $assetNodeData;
+        return $this->findOneByPath('/' . self::METADATA_ROOT_NODE_NAME . '/' . $asset->getIdentifier(), $workspace);
     }
 
     /**
@@ -43,7 +43,9 @@ class MetaDataRepository extends NodeDataRepository
      */
     public function removeByAsset(Asset $asset, Workspace $workspace)
     {
-        $assetNodeData = $this->findOneByAssetIdentifier($asset->getIdentifier(), $workspace);
-        $this->remove($assetNodeData);
+        $nodeData = $this->findOneByAsset($asset, $workspace);
+        if ($nodeData !== null) {
+            $this->remove($nodeData);
+        }
     }
 }
