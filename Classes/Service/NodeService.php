@@ -13,6 +13,7 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Service;
 
 use TYPO3\Flow\Annotations as Flow;
 use Neos\MetaData\ContentRepositoryAdapter\Domain\Repository\MetaDataRepository;
+use TYPO3\Flow\Persistence\PersistenceManagerInterface;
 use TYPO3\TYPO3CR\Domain\Service\Context;
 use TYPO3\TYPO3CR\Domain\Factory\NodeFactory;
 use TYPO3\TYPO3CR\Domain\Model\NodeTemplate;
@@ -56,6 +57,12 @@ class NodeService
     protected $metaDataRootNode = null;
 
     /**
+     * @Flow\Inject
+     * @var PersistenceManagerInterface
+     */
+    protected $persistenceManager;
+
+    /**
      * @param Context $context
      * @return NodeInterface
      * @throws NodeTypeNotFoundException
@@ -82,6 +89,7 @@ class NodeService
         $rootNode = $context->getRootNode();
 
         $this->metaDataRootNode = $rootNode->createNodeFromTemplate($nodeTemplate);
+        $this->persistenceManager->persistAll();
         return $this->metaDataRootNode;
     }
 

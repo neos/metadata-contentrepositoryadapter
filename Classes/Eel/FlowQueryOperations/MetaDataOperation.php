@@ -13,6 +13,9 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Eel\FlowQueryOperations;
 
 use TYPO3\Eel\FlowQuery\Operations\AbstractOperation;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Media\Domain\Model\Image;
+use TYPO3\Media\Domain\Model\ImageVariant;
+use TYPO3\TYPO3CR\Domain\Model\NodeData;
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 use TYPO3\Eel\FlowQuery\FlowQuery;
 
@@ -21,7 +24,6 @@ use TYPO3\Eel\FlowQuery\FlowQuery;
  */
 class MetaDataOperation extends AbstractOperation
 {
-
     /**
      * {@inheritdoc}
      *
@@ -80,20 +82,25 @@ class MetaDataOperation extends AbstractOperation
      *
      * @param FlowQuery $flowQuery the FlowQuery object
      * @param array $arguments the arguments for this operation
-     * @return \DateTime
+     * @return mixed|null if the operation is final, the return value
      */
     public function evaluate(FlowQuery $flowQuery, array $arguments)
     {
         $imagePropertyName = $arguments[0];
         if ($this->contextNode->hasProperty($imagePropertyName)) {
-
-            $imageArray = $this->contextNode->getProperties($arguments[0]);
-            $image = $imageArray['image'];
-
-            $identifier = $image->getidentifier();
-
-            $nodeData = $this->metaDataRepository->findOneByAssetIdentifier($identifier, $this->contextNode->getContext()->getWorkspace());
-            return $this->nodeFactory->createFromNodeData($nodeData, $this->contextNode->getContext());
+            $image = $this->contextNode->getProperty($imagePropertyName);
+            if ($image instanceof ImageVariant) {
+                $image = $image->getOriginalAsset();
+            }
+            if ($image instanceof Image) {
+                $identifier = $image->getIdentifier();
+                $nodeData = $this->metaDataRepository->findOneByAssetIdentifier($identifier, $this->contextNode->getContext()->getWorkspace());
+                if ($nodeData instanceof NodeData) {
+                    return $this->nodeFactory->createFromNodeData($nodeData, $this->contextNode->getContext());
+                }
+            }
         }
+
+        return null;
     }
 }

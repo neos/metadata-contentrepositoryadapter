@@ -15,7 +15,6 @@ use TYPO3\Media\Domain\Model\Asset;
 use TYPO3\TYPO3CR\Domain\Model\NodeData;
 use TYPO3\TYPO3CR\Domain\Model\Workspace;
 use TYPO3\TYPO3CR\Domain\Repository\NodeDataRepository;
-use TYPO3\TYPO3CR\Domain\Service\Context;
 use TYPO3\Flow\Annotations as Flow;
 
 /**
@@ -23,11 +22,9 @@ use TYPO3\Flow\Annotations as Flow;
 */
 class MetaDataRepository extends NodeDataRepository
 {
-
     const ENTITY_CLASSNAME = NodeData::class;
 
     const METADATA_ROOT_NODE_NAME = 'assets';
-
 
     /**
      * @param $assetIdentifier
@@ -40,10 +37,13 @@ class MetaDataRepository extends NodeDataRepository
         return $assetNodeData;
     }
 
-    
-    public function removeByAsset(Asset $asset)
+    /**
+     * @param Asset $asset
+     * @param Workspace $workspace
+     */
+    public function removeByAsset(Asset $asset, Workspace $workspace)
     {
-        $assetNodeData = $this->findOneByAssetIdentifier($asset->getIdentifier(), new Context());
+        $assetNodeData = $this->findOneByAssetIdentifier($asset->getIdentifier(), $workspace);
         $this->remove($assetNodeData);
     }
 }

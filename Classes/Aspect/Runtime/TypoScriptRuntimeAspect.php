@@ -44,7 +44,9 @@ class TypoScriptRuntimeAspect
 
             $metaDataRootNode = $this->nodeService->findOrCreateMetaDataRootNode($node->getContext());
 
-            $runtime->pushContext(MetaDataRepository::METADATA_ROOT_NODE_NAME, $metaDataRootNode);
+            $currentContext = $runtime->popContext();
+            $currentContext[MetaDataRepository::METADATA_ROOT_NODE_NAME] = $metaDataRootNode;
+            $runtime->pushContextArray($currentContext);
         }
     }
 }
