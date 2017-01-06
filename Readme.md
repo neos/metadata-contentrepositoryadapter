@@ -55,7 +55,7 @@ prototype(TYPO3.Neos.NodeTypes:Image) {
 Get all meta data nodes matching the filter:
 
 ```
-collection = ${q(metaDataRootNode).children('[instanceof Neos.MetaData:Exif][artist*="Daniel Lienert"]').get()}
+collection = ${q(assets).children('[instanceof Neos.MetaData:Exif][artist*="Daniel Lienert"]').get()}
 ```
 
 Get the assets referenced by those meta data nodes:
