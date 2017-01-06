@@ -11,16 +11,17 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Eel\FlowQueryOperations;
  * source code.
  */
 
+use TYPO3\Eel\FlowQuery\FlowQuery;
 use TYPO3\Eel\FlowQuery\Operations\AbstractOperation;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Media\Domain\Repository\AssetRepository;
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
-use TYPO3\Eel\FlowQuery\FlowQuery;
 
 /**
  * EEL operation to get the assets from meta data nodes
  */
-class GetAssetsOperation extends AbstractOperation {
-
+class GetAssetsOperation extends AbstractOperation
+{
     /**
      * {@inheritdoc}
      *
@@ -41,13 +42,8 @@ class GetAssetsOperation extends AbstractOperation {
     protected static $final = true;
 
     /**
-     * @var array
-     */
-    protected $metaDataNodes;
-
-    /**
      * @Flow\Inject
-     * @var \TYPO3\Media\Domain\Repository\AssetRepository
+     * @var AssetRepository
      */
     protected $assetRepository;
 
@@ -56,16 +52,19 @@ class GetAssetsOperation extends AbstractOperation {
      *
      * We can only handle TYPO3CR Nodes.
      *
-     * @param mixed $context
+     * @param array $context
+     *
      * @return boolean
      */
-    public function canEvaluate($context) {
-
-        if (isset($context[0]) && ($context[0] instanceof NodeInterface) || is_array($context[0])) {
-            $this->metaDataNodes = is_array($context) ? $context : [$context];
-            return true;
+    public function canEvaluate($context)
+    {
+        foreach ($context as $contextNode) {
+            if (!($contextNode instanceof NodeInterface)) {
+                return false;
+            }
         }
-        return false;
+
+        return true;
     }
 
     /**
@@ -73,17 +72,16 @@ class GetAssetsOperation extends AbstractOperation {
      *
      * @param FlowQuery $flowQuery the FlowQuery object
      * @param array $arguments the arguments for this operation
-     * @return \DateTime
+     *
+     * @return array
      */
-    public function evaluate(FlowQuery $flowQuery, array $arguments) {
-
+    public function evaluate(FlowQuery $flowQuery, array $arguments)
+    {
         $assets = [];
-        foreach($this->metaDataNodes as $metaDataNode) {
-
-            if($metaDataNode instanceof NodeInterface) {
-                $assetIdentifier = $metaDataNode->getNodeData()->getName();
-                $assets[] = $this->assetRepository->findByIdentifier($assetIdentifier);
-            }
+        foreach ($flowQuery->getContext() as $metaDataNode) {
+            /** @var NodeInterface $metaDataNode */
+            $assetIdentifier = $metaDataNode->getNodeData()->getName();
+            $assets[$assetIdentifier] = $this->assetRepository->findByIdentifier($assetIdentifier);
         }
 
         return $assets;

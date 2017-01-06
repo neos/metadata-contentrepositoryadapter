@@ -12,8 +12,12 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Aspect\Runtime;
  */
 
 use Neos\MetaData\ContentRepositoryAdapter\Domain\Repository\MetaDataRepository;
+use Neos\MetaData\ContentRepositoryAdapter\Service\NodeService;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\AOP\JoinPointInterface;
+use TYPO3\Flow\Reflection\ObjectAccess;
+use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
+use TYPO3\TypoScript\Core\Runtime;
 
 /**
  * @Flow\Aspect
@@ -22,31 +26,46 @@ class TypoScriptRuntimeAspect
 {
     /**
      * @Flow\Inject
-     * @var \Neos\MetaData\ContentRepositoryAdapter\Service\NodeService
+     * @var NodeService
      */
     protected $nodeService;
 
     /**
      * @param JoinPointInterface $joinPoint
-     * @Flow\After("method(TYPO3\TypoScript\Core\Runtime->pushContextArray())")
+     * @Flow\Before("method(TYPO3\TypoScript\Core\Runtime->pushContextArray())")
+     *
+     * @return void
+     */
+    public function extendContextArrayWithMetaDataRootNode(JoinPointInterface $joinPoint)
+    {
+        $contextArray = $joinPoint->getMethodArgument('contextArray');
+        if (isset($contextArray['node'])) {
+            /** @var NodeInterface $node */
+            $node = $contextArray['node'];
+            $contextArray[MetaDataRepository::METADATA_ROOT_NODE_NAME] = $this->nodeService->findOrCreateMetaDataRootNode($node->getContext());
+            $joinPoint->setMethodArgument('contextArray', $contextArray);
+        }
+    }
+
+    /**
+     * @param JoinPointInterface $joinPoint
+     * @Flow\AfterReturning("method(TYPO3\TypoScript\Core\Runtime->pushContext(key == 'node'))")
+     *
      * @return void
      */
     public function extendContextWithMetaDataRootNode(JoinPointInterface $joinPoint)
     {
-        /** @var \TYPO3\TypoScript\Core\Runtime $runtime */
+        /** @var Runtime $runtime */
         $runtime = $joinPoint->getProxy();
 
-        $currentContext = $runtime->getCurrentContext();
+        $renderingStack = ObjectAccess::getProperty($runtime, 'renderingStack', true);
+        $contextArray = array_pop($renderingStack);
 
-        if(isset($currentContext['node'])) {
-            /** @var \TYPO3\TYPO3CR\Domain\Model\NodeInterface $node */
-            $node = $currentContext['node'];
+        /** @var NodeInterface $node */
+        $node = $contextArray['node'];
+        $contextArray[MetaDataRepository::METADATA_ROOT_NODE_NAME] = $this->nodeService->findOrCreateMetaDataRootNode($node->getContext());
 
-            $metaDataRootNode = $this->nodeService->findOrCreateMetaDataRootNode($node->getContext());
-
-            $currentContext = $runtime->popContext();
-            $currentContext[MetaDataRepository::METADATA_ROOT_NODE_NAME] = $metaDataRootNode;
-            $runtime->pushContextArray($currentContext);
-        }
+        $renderingStack[] = $contextArray;
+        ObjectAccess::setProperty($runtime, 'renderingStack', $renderingStack);
     }
 }

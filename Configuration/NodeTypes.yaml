@@ -1,5 +1,710 @@
-'Neos.MetaData:Asset':
+'Neos.MetaData:AbstractMetaData':
   abstract: true
+  properties:
+    assetObject:
+      type: TYPO3\Media\Domain\Model\AssetInterface
+      mapping: '${asset.assetObject}'
+
+'Neos.MetaData:Exif':
+  abstract: true
+  superTypes:
+    'Neos.MetaData:AbstractMetaData': true
+  ui:
+    label: 'EXIF'
+  properties:
+    dateTime:
+      type: DateTime
+      mapping: '${exif.DateTime}'
+      ui:
+        label: 'DateTime'
+        help:
+          message: The date and time of image creation
+    imageDescription:
+      type: string
+      mapping: '${exif.ImageDescription}'
+      ui:
+        label: 'Image Description'
+        help:
+          message: A character string giving the title of the image.
+    make:
+      type: string
+      mapping: '${exif.Make}'
+      ui:
+        label: 'Make'
+        help:
+          message: The manufacturer of the recording equipment.
+    model:
+      type: string
+      mapping: '${exif.Model}'
+      ui:
+        label: 'Model'
+        help:
+          message: The model name or model number of the equipment.
+    software:
+      type: string
+      mapping: '${exif.Software}'
+      ui:
+        label: 'Software'
+        help:
+          message: The name and version of the software or firmware of the camera or image input device used to generate the image.
+    artist:
+      type: string
+      mapping: '${exif.Artist}'
+      ui:
+        label: 'Artist'
+        help:
+          message: The name of the camera owner, photographer or image creator.
+    copyright:
+      type: string
+      mapping: '${exif.Copyright}'
+      ui:
+        label: 'Copyright'
+        help:
+          message: Copyright information.
+    colorSpace:
+      type: string
+      mapping: '${exif.ColorSpace}'
+      ui:
+        label: 'Color Space'
+    UserComment:
+      type: string
+      mapping: '${exif.UserComment}'
+      ui:
+        label: 'User Comment'
+        help:
+          message: Keywords or comments on the image besides those in "Image Description"
+    dateTimeOriginal:
+      type: DateTime
+      mapping: '${exif.DateTimeOriginal}'
+      ui:
+        label: 'DateTimeOriginal'
+        help:
+          message: The date and time when the original image data was generated
+    dateTimeDigitized:
+      type: DateTime
+      mapping: '${exif.DateTimeDigitized}'
+      ui:
+        label: 'DateTimeDigitized'
+        help:
+          message: The date and time when the image was stored as digital data
+    exposureTime:
+      type: float
+      mapping: '${exif.ExposureTime}'
+      ui:
+        label: 'Exposure Time'
+        help:
+          message: Exposure time, given in seconds.
+    fNumber:
+      type: float
+      mapping: '${exif.FNumber}'
+      ui:
+        label: 'F Number'
+    exposureProgram:
+      type: string
+      mapping: '${exif.ExposureProgram}'
+      ui:
+        label: 'Exposure Program'
+        help:
+          message: The class of the program used by the camera to set exposure when the picture was taken.
+    photographicSensitivity:
+      type: integer
+      mapping: '${exif.PhotographicSensitivity}'
+      ui:
+        label: 'Photographic Sensitivity'
+        help:
+          message: The sensitivity of the camera or input device when the image was shot.
+    sensitivityType:
+      type: string
+      mapping: '${exif.SensitivityType}'
+      ui:
+        label: 'Sensitivity Type'
+        help:
+          message: Which one of the parameters of ISO 12232 is the Photographic Sensitivity.
+    isoSpeed:
+      type: integer
+      mapping: '${exif.ISOSpeed}'
+      ui:
+        label: 'ISO Speed'
+        help:
+          message: The ISO Speed value of the camera or input device as specified in ISO 12232.
+    shutterSpeed:
+      type: float
+      mapping: '${exif.ShutterSpeedValue}'
+      ui:
+        label: 'Shutter Speed'
+    aperture:
+      type: float
+      mapping: '${exif.ApertureValue}'
+      ui:
+        label: 'Aperture'
+        help:
+          message: The lens aperture.
+    brightness:
+      type: float
+      mapping: '${exif.Brightness}'
+      ui:
+        label: 'Brightness'
+    exposureBias:
+      type: float
+      mapping: '${exif.ExposureBiasValue}'
+      ui:
+        label: 'Exposure Bias'
+    maxAperture:
+      type: float
+      mapping: '${exif.MaxApertureValue}'
+      ui:
+        label: 'Maximum Aperture'
+        help:
+          message: The smallest F number of the lens.
+    subjectDistance:
+      type: float
+      mapping: '${exif.SubjectDistance}'
+      ui:
+        label: 'Subject Distance'
+        help:
+          message: The distance to the subject, given in meters.
+    meteringMode:
+      type: string
+      mapping: '${exif.MeteringMode}'
+      ui:
+        label: 'Metering Mode'
+    lightSource:
+      type: string
+      mapping: '${exif.LightSource}'
+      ui:
+        label: 'Light Source'
+        help:
+          message: The kind of light source.
+    flash:
+      type: string
+      mapping: '${exif.Flash}'
+      ui:
+        label: 'Flash'
+        help:
+          message: The status of flash when the image was shot.
+    focalLength:
+      type: float
+      mapping: '${exif.FocalLength}'
+      ui:
+        label: 'Focal Length'
+        help:
+          message: The actual focal length of the lens, in mm.
+    flashEnergy:
+      type: float
+      mapping: '${exif.FlashEnergy}'
+      ui:
+        label: 'Flash Energy'
+        help:
+          message: The strobe energy at the time the image is captured, as measured in Beam Candle Power Seconds (BCPS).
+    exposureIndex:
+      type: float
+      mapping: '${exif.ExposureIndex}'
+      ui:
+        label: 'Exposure Index'
+        help:
+          message: The exposure index selected on the camera or input device at the time the image is captured.
+    sensingMethod:
+      type: string
+      mapping: '${exif.SensingMethod}'
+      ui:
+        label: 'Sensing Method'
+        help:
+          message: The image sensor type on the camera or input device.
+    exposureMode:
+      type: string
+      mapping: '${exif.ExposureMode}'
+      ui:
+        label: 'Exposure Mode'
+        help:
+          message: The exposure mode set when the image was shot.
+    whiteBalance:
+      type: string
+      mapping: '${exif.WhiteBalance}'
+      ui:
+        label: 'White Balance'
+        help:
+          message: The white balance mode set when the image was shot.
+    digitalZoomRatio:
+      type: float
+      mapping: '${exif.DigitalZoomRatio}'
+      ui:
+        label: 'Digital Zoom Ratio'
+        help:
+          message: The digital zoom ratio when the image was shot.
+    focalLengthIn35mmFilm:
+      type: integer
+      mapping: '${exif.FocalLengthIn35mmFilm}'
+      ui:
+        label: 'Focal Length in 35mm Film'
+        help:
+          message: The equivalent focal length assuming a 35mm film camera, in mm.
+    sceneCaptureType:
+      type: string
+      mapping: '${exif.SceneCaptureType}'
+      ui:
+        label: 'Scene Capture Type'
+        help:
+          message: The type of scene that was shot.
+    gainControl:
+      type: string
+      mapping: '${exif.GainControl}'
+      ui:
+        label: 'Gain Control'
+        help:
+          message: The degreee of overall image gain adjustment.
+    contrast:
+      type: string
+      mapping: '${exif.Contrast}'
+      ui:
+        label: 'Contrast'
+        help:
+          message: The direction of contrast processing applied by the camera when the image was shot.
+    saturation:
+      type: string
+      mapping: '${exif.Saturation}'
+      ui:
+        label: 'Saturation'
+        help:
+          message: The direction of saturation processing applied by the camera when the image was shot.
+    sharpness:
+      type: string
+      mapping: '${exif.Sharpness}'
+      ui:
+        label: 'Sharpness'
+        help:
+          message: The direction of sharpness processing applied by the camera when the image was shot.
+    subjectDistanceRange:
+      type: string
+      mapping: '${exif.SubjectDistanceRange}'
+      ui:
+        label: 'Subject Distance Range'
+        help:
+          message: The distance to the subject.
+    temperature:
+      type: float
+      mapping: '${exif.Temperature}'
+      ui:
+        label: 'Temperature'
+        help:
+          message: Temperature as the ambient situation at the shot, for example the room temperature where the photographer was holding the camera. The unit is °C.
+    humidity:
+      type: float
+      mapping: '${exif.Humidity}'
+      ui:
+        label: 'Humidity'
+        help:
+          message: Humidity as the ambient situation at the shot, for example the room humidity where the photographer was holding the camera. The unit is %.
+    pressure:
+      type: float
+      mapping: '${exif.Pressure}'
+      ui:
+        label: 'Pressure'
+        help:
+          message: Pressure as the ambient situation at the shot, for example the room atmospfere where the photographer was holding the camera or the water pressure under the sea. The unit is hPa.
+    waterDepth:
+      type: float
+      mapping: '${exif.WaterDepth}'
+      ui:
+        label: 'Water Depth'
+        help:
+          message: Water depth as the ambient situation at the shot, for example the water depth of the camera at underwater photography. The unit is m.
+    acceleration:
+      type: float
+      mapping: '${exif.Acceleration}'
+      ui:
+        label: 'Acceleration'
+        help:
+          message: Acceleration (a scalar regardless of direction) as the ambient situation at the shot, for example the driving acceleration of the vehicle which the photographer rode on at the shot. The unit is mGal (10⁻⁵ m/s²).
+    cameraElevationAngle:
+      type: float
+      mapping: '${exif.CameraElevationAngle}'
+      ui:
+        label: 'Camera Elevation Angle'
+        help:
+          message: Elevation/depression angle of the orientation of the camera (imaging optical axis) as the ambient situation at the shot. The unit is degree (°).
+    cameraOwnerName:
+      type: string
+      mapping: '${exif.CameraOwnerName}'
+      ui:
+        label: 'Camera Owner Name'
+        help:
+          message: The owner of the camera used in photography.
+    bodySerialNumber:
+      type: string
+      mapping: '${exif.BodySerialNumber}'
+      ui:
+        label: 'Body Serial Number'
+        help:
+          message: The serial number of the body of the camera that was used in photography.
+    lensMake:
+      type: string
+      mapping: '${exif.LensMake}'
+      ui:
+        label: 'Lens Make'
+        help:
+          message: The lens manufacturer.
+    lensModel:
+      type: string
+      mapping: '${exif.LensModel}'
+      ui:
+        label: 'Lens Model'
+        help:
+          message: The lens's model name and model number.
+    lensSerialNumber:
+      type: string
+      mapping: '${exif.LensSerialNumber}'
+      ui:
+        label: 'Lens Serial Number'
+        help:
+          message: The serial number of the interchangeable lens that was used in photography.
+    gpsLatitude:
+      type: float
+      mapping: '${exif.GPSLatitude}'
+      ui:
+        label: 'GPS Latitude'
+        help:
+          message: The GPS latitude given as a WGS-84 float number.
+    gpsLongitude:
+      type: float
+      mapping: '${exif.GPSLongitude}'
+      ui:
+        label: 'GPS Longitude'
+        help:
+          message: The GPS longitude given as a WGS-84 float number.
+    gpsAltitude:
+      type: float
+      mapping: '${exif.GPSAltitude}'
+      ui:
+        label: 'GPS Altitude'
+        help:
+          message: The altitude. The reference unit is meters.
+    gpsDateTimeStamp:
+      type: DateTime
+      mapping: '${exif.GPSDateTimeStamp}'
+      ui:
+        label: 'GPS DateTime Stamp'
+        help:
+          message: The date and time as UTC (Coordinated Universal Time)
+    gpsSatellites:
+      type: string
+      mapping: '${exif.GPSSatellites}'
+      ui:
+        label: 'GPS Satellites'
+        help:
+          message: The GPS satellites used for measurements.
+    gpsStatus:
+      type: string
+      mapping: '${exif.GPSStatus}'
+      ui:
+        label: 'GPS Status'
+        help:
+          message: The status of the GPS receiver when the image is recorded.
+    gpsMeasureMode:
+      type: string
+      mapping: '${exif.GPSMeasureMode}'
+      ui:
+        label: 'GPS Measure Mode'
+        help:
+          message: The GPS measurement mode. Originally it was defined for GPS, but it may be used for recording a measure mode to record the position information provided from a mobile base station or wireless LAN as well as GPS.
+    gpsDop:
+      type: float
+      mapping: '${exif.GPSDOP}'
+      ui:
+        label: 'GPS DoP'
+        help:
+          message: The GPS DoP (data degree of precision). An HDOP value is written during two-dimensional measurement, and PDOP during three-dimensional measurement.
+    gpsSpeedRef:
+      type: string
+      mapping: '${exif.GPSSpeedRef}'
+      ui:
+        label: 'GPS Speed Reference'
+        help:
+          message: The unit used to express the GPS receiver speed of movement.
+    gpsSpeed:
+      type: float
+      mapping: '${exif.GPSSpeed}'
+      ui:
+        label: 'GPS Speed'
+        help:
+          message: The speed of GPS receiver movement.
+    gpsTrackRef:
+      type: string
+      mapping: '${exif.GPSTrackRef}'
+      ui:
+        label: 'GPS Track Reference'
+        help:
+          message: The reference for giving the direction of GPS receiver movement.
+    gpsTrack:
+      type: float
+      mapping: '${exif.GPSTrack}'
+      ui:
+        label: 'GPS Track'
+        help:
+          message: The direction of GPS receiver movement.
+    gpsImgDirectionRef:
+      type: string
+      mapping: '${exif.GPSImgDirectionRef}'
+      ui:
+        label: 'GPS Image Direction Reference'
+        help:
+          message: The reference for giving the direction of the image when it is captured.
+    gpsImgDirection:
+      type: float
+      mapping: '${exif.GPSImgDirection}'
+      ui:
+        label: 'GPS Image Direction'
+        help:
+          message: The direction of the image when it was captured.
+    gpsMapDatum:
+      type: string
+      mapping: '${exif.GPSMapDatum}'
+      ui:
+        label: 'GPS Map Datum'
+        help:
+          message: The geodetic survey data used by the GPS receiver.
+    gpsDestLatitude:
+      type: float
+      mapping: '${exif.GPSDestLatitude}'
+      ui:
+        label: 'GPS Destinatino Latitude'
+        help:
+          message: The latitude of the destination point.
+    gpsDestLongitude:
+      type: float
+      mapping: '${exif.GPSDestLongitude}'
+      ui:
+        label: 'GPS Destinatino Longitude'
+        help:
+          message: The longitude of the destination point.
+    gpsDestBearingRef:
+      type: string
+      mapping: '${exif.GPSDestBearingRef}'
+      ui:
+        label: 'GPS Destination Bearing Reference'
+        help:
+          message: The reference used for giving the bearing of the destination point.
+    gpsDestBearing:
+      type: float
+      mapping: '${exif.GPSDestBearing}'
+      ui:
+        label: 'GPS Destination Bearing'
+        help:
+          message: The bearing to the destination point.
+    gpsDestDistanceRef:
+      type: string
+      mapping: '${exif.GPSDestDistanceRef}'
+      ui:
+        label: 'GPS Destination Distance Reference'
+        help:
+          message: The unit used to express the distance to the destination point.
+    gpsDestDistance:
+      type: float
+      mapping: '${exif.GPSDestDistance}'
+      ui:
+        label: 'GPS Destination Distance'
+        help:
+          message: The distance to the destination point.
+    gpsProcessingMethod:
+      type: string
+      mapping: '${exif.GPSProcessingMethod}'
+      ui:
+        label: 'GPS Processing Method'
+        help:
+          message: The name of the method used for location finding.
+    gpsAreaInformation:
+      type: string
+      mapping: '${exif.GPSAreaInformation}'
+      ui:
+        label: 'GPS Area Information'
+        help:
+          message: The name of the GPS area.
+    gpsDifferential:
+      type: string
+      mapping: '${exif.GPSDifferential}'
+      ui:
+        label: 'GPS Differential'
+        help:
+          message: Whether differential correction is applied to the GPS receiver.
+    gpsHPositioningError:
+      type: float
+      mapping: '${exif.GPSHPositionalError}'
+      ui:
+        label: 'GPS Horizontal Positioning Error'
+        help:
+          message: Horizontal positioning errors in meters.
+
+'Neos.MetaData:Iptc':
+  abstract: true
+  superTypes:
+    'Neos.MetaData:AbstractMetaData': true
+  ui:
+    label: 'IPTC'
+  properties:
+    city:
+      type: string
+      mapping: '${iptc.City}'
+      ui:
+        label: 'City'
+        help:
+          message: Name of the city the content is focussing on -- either the place shown in visual media or referenced by text or audio media. This element is at the third level of a top-down geographical hierarchy.
+    contact:
+      type: array
+      mapping: '${iptc.Contact}'
+      ui:
+        label: 'Contact'
+        help:
+          message: The creator's contact information provides all necessary information to get in contact with the creator of this item and comprises a set of sub-properties for proper addressing.
+    copyrightNotice:
+      type: string
+      mapping: '${iptc.CopyrightNotice}'
+      ui:
+        label: 'Copyright Notice'
+        help:
+          message: Contains any necessary copyright notice for claiming the intellectual property for this item and should identify the current owner of the copyright for the item. Other entities like the creator of the item may be added in the corresponding field. Notes on usage rights should be provided in "Rights usage terms".
+    country:
+      type: string
+      mapping: '${iptc.Country}'
+      ui:
+        label: 'Country'
+        help:
+          message: Full name of the country the content is focussing on -- either the country shown in visual media or referenced in text or audio media. This element is at the top/first level of a top-down geographical hierarchy. The full name should be expressed as a verbal name and not as a code, a code should go to the element "CountryCode"
+    countryCode:
+      type: string
+      mapping: '${iptc.CountryCode}'
+      ui:
+        label: 'Country Code'
+        help:
+          message: Code of the country the content is focussing on -- either the country shown in visual media or referenced in text or audio media. This element is at the top/first level of a top-down geographical hierarchy. The code should be taken from ISO 3166 two or three letter code. The full name of a country should go to the "Country" element.
+    creationDate:
+      type: DateTime
+      mapping: '${iptc.CreationDate}'
+      ui:
+        label: 'Creation Date'
+        help:
+          message: Designates the date and optionally the time the intellectual content was created rather than the date of the creation of the physical representation.
+    creator:
+      type: array
+      mapping: '${iptc.Creator}'
+      ui:
+        label: 'Creator'
+        help:
+          message: Contains the name of the person who created the content of this item, a photographer for photos, a graphic artist for graphics, or a writer for textual news, but in cases where the photographer should not be identified the name of a company or organisation may be appropriate.
+    creatorTitle:
+      type: array
+      mapping: '${iptc.CreatorTitle}'
+      ui:
+        label: 'Creator Title'
+        help:
+          message: Contains the job title of the person who created the content of this item. As this is sort of a qualifier the Creator element has to be filled in as mandatory prerequisite for using Creator's Jobtitle.
+    creditLine:
+      type: string
+      mapping: '${iptc.CreditLine}'
+      ui:
+        label: 'Credit Line'
+        help:
+          message: The credit to person(s) and/or organisation(s) required by the supplier of the item to be used when published. This is a free-text field.
+    deprecatedCategories:
+      type: array
+      mapping: '${iptc.DeprecatedCategories}'
+      ui:
+        label: 'Categories (deprecated)'
+        help:
+          message: Early versions of IIM included the Datasets 2:15 “Category” and 2:20 “Supplemental Category”. But these two fields were replaced in IIM version 4 (released in 1999) by the Dataset 2:12 “Subject Reference” which must be populated by values from the Subject NewsCodes controlled vocabulary. In version 4 of the IIM specification document the Datasets Category and Supplemental Category were indicated as “deprecated” which meant that after the time of this release these two Datasets should not be populated with values any longer.
+    description:
+      type: string
+      mapping: '${iptc.Description}'
+      ui:
+        label: 'Description'
+        help:
+          message: A textual description, including captions, of the item's content, particularly used where the object is not text.
+    descriptionWriter:
+      type: array
+      mapping: '${iptc.DescriptionWriter}'
+      ui:
+        label: 'Description Writer'
+        help:
+          message: Identifier or the name of the person involved in writing, editing or correcting the description of the content.
+    digitalCreationDate:
+      type: DateTime
+      mapping: '${iptc.DigitalCreationDate}'
+      ui:
+        label: 'Digital Creation Date'
+        help:
+          message: Designates the date/time the digital representation of the objectdata was created.
+    headline:
+      type: string
+      mapping: '${iptc.Headline}'
+      ui:
+        label: 'Headline'
+        help:
+          message: A brief synopsis of the caption. Headline is not the same as Title.
+    instructions:
+      type: string
+      mapping: '${iptc.Instructions}'
+      ui:
+        label: 'Instructions'
+        help:
+          message: Any of a number of instructions from the provider or creator to the receiver of the item.
+    intellectualGenres:
+      type: array
+      mapping: '${iptc.IntellectualGenres}'
+      ui:
+        label: 'Intellectual Genres'
+        help:
+          message: Describes the nature, intellectual, artistic or journalistic characteristic of a item, not specifically its content.
+    jobId:
+      type: string
+      mapping: '${iptc.JobId}'
+      ui:
+        label: 'Job ID'
+        help:
+          message: Number or identifier for the purpose of improved workflow handling. This is a user created identifier related to the job for which the item is supplied.
+    keywords:
+      type: array
+      mapping: '${iptc.Keywords}'
+      ui:
+        label: 'Keywords'
+        help:
+          message: Keywords to express the subject of the content. Keywords may be free text and don't have to be taken from a controlled vocabulary. Codes from the controlled vocabulary IPTC Subject NewsCodes must go to the "Subject Code" field.
+    source:
+      type: string
+      mapping: '${iptc.Source}'
+      ui:
+        label: 'Source'
+        help:
+          message: The name of a person or party who has a role in the content supply chain. This could be an agency, a member of an agency, an individual or a combination. Source could be different from Creator and from the entities in the Copyright Notice.
+    state:
+      type: string
+      mapping: '${iptc.State}'
+      ui:
+        label: 'State'
+        help:
+          message: Name of the subregion of a country -- either called province or state or anything else -- the content is focussing on -- either the subregion shown in visual media or referenced by text or audio media. This element is at the second level of a top-down geographical hierarchy.
+    subjectCodes:
+      type: array
+      mapping: '${iptc.SubjectCodes}'
+      ui:
+        label: 'Subject Codes'
+        help:
+          message: Specifies one or more Subjects from the IPTC Subject-NewsCodes taxonomy to categorise the content. Each Subject is represented as a string of 8 digits in an unordered list.
+    sublocation:
+      type: string
+      mapping: '${iptc.Sublocation}'
+      ui:
+        label: 'Sublocation'
+        help:
+          message: Name of a sublocation the content is focussing on -- either the location shown in visual media or referenced by text or audio media. This location name could either be the name of a sublocation to a city or the name of a well known location or (natural) monument outside a city. In the sense of a sublocation to a city this element is at the fourth level of a top-down geographical hierarchy.
+    title:
+      type: string
+      mapping: '${iptc.Title}'
+      ui:
+        label: 'Title'
+        help:
+          message: A shorthand reference for the item. Title provides a short human readable name which can be a text and/or numeric reference. It is not the same as Headline.
+
+'Neos.MetaData:Asset':
+  superTypes:
+    'Neos.MetaData:AbstractMetaData': true
   properties:
     originalFileName:
       type: string
@@ -16,111 +721,6 @@
     collections:
       type: array
       mapping: '${asset.Collections}'
-    assetObject:
-      type: TYPO3\Media\Domain\Model\AssetInterface
-      mapping: '${asset.assetObject}'
-
-'Neos.MetaData:Iptc':
-  abstract: true
-  properties:
-    creationDate:
-      type: DateTime
-      mapping: '${iptc.CreationDate}'
-    authorByline:
-      type: string
-      mapping: '${iptc.authorByLine}'
-    city:
-      type: string
-      mapping: '${iptc.City}'
-      help:
-        message: Name of the city of a location.
-    country:
-      type: string
-      mapping: '${iptc.Country}'
-      help:
-        message: Name of the country of a location.
-    description:
-      type: string
-      mapping: '${iptc.Description}'
-      help:
-        message: A textual description, including captions, of the item's content, particularly used where the object is not text.
-    keywords:
-      type: array
-      mapping: '${iptc.Keywords}'
-      help:
-        message: Keywords to express the subject of the content. Keywords may be free text and don't have to be taken from a controlled vocabulary.
-    state:
-      type: string
-      mapping: '${iptc.State}'
-      help:
-        message: The name of a subregion of a country - a province or state - of a location.
-    subLocation:
-      type: string
-      mapping: '${iptc.SubLocation}'
-      help:
-        message: Name of a sublocation. This sublocation name could either be the name of a sublocation to a city or the name of a well known location or (natural) monument outside a city.
-    title:
-      type: string
-      mapping: '${iptc.Title}'
-      help:
-        message: A shorthand reference for the item. Title provides a short human readable name which can be a text and/or numeric reference.
-
-'Neos.MetaData:Exif':
-  abstract: true
-  properties:
-    aperture:
-      type: float
-      mapping: '${exif.Aperture}'
-      help:
-        message: The lens aperture.
-    artist:
-      type: string
-      mapping: '${exif.Artist}'
-    colorSpace:
-      type: string
-      mapping: '${exif.ColorSpace}'
-      help:
-        message: The color space information tag.
-    exposureTime:
-      type: integer
-      mapping: '${exif.ExposureTime}'
-      help:
-        message: Exposure time, given in seconds.
-    focalLength:
-      type: integer
-      mapping: '${exif.FocalLength}'
-      help:
-        message: The actual focal length of the lens, in mm.
-    gpsLatitude:
-      type: float
-      mapping: '${exif.GPSLatitude}'
-      help:
-        message: The GPS latitude given as a WGS84 float number.
-    gpsLongitude:
-      type: float
-      mapping: '${exif.FocalLength}'
-      help:
-        message: The GPS longitude given as a WGS84 float number.
-    isoSpeedRatings:
-      type: integer
-      mapping: '${exif.ISOSpeedRatings}'
-      help:
-        message: Indicates the ISO Speed and ISO Latitude of the camera or input device as specified in ISO 12232.
-    imageDescription:
-      type: string
-      mapping: '${exif.ImageDescription}'
-      help:
-        message: A character string giving the title of the image.
-    make:
-      type: string
-      mapping: '${exif.Make}'
-      help:
-        message: The manufacturer of the recording equipment.
-    model:
-      type: string
-      mapping: '${exif.Model}'
-      help:
-        message: The model name or model number of the equipment.
 
 'Neos.MetaData:Image':
   superTypes:
@@ -128,13 +728,5 @@
     'Neos.MetaData:Exif': true
     'Neos.MetaData:Iptc': true
   properties:
-    artist: ~
-    authorByline:
-      type: string
-      mapping: '${iptc.AuthorByLine || exif.Artist}'
-    description:
-      type: string
-      mapping: '${asset.Caption || iptc.Description}'
     title:
-      type: string
-      mapping: '${asset.Title || iptc.Title || exif.imageDescription}'
+      mapping: '${asset.Title || iptc.Title}'
