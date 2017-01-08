@@ -14,8 +14,8 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Eel\Helper;
 use Neos\MetaData\ContentRepositoryAdapter\Domain\Repository\MetaDataRepository;
 use Neos\Eel\ProtectedContextAwareInterface;
 use Neos\Flow\Annotations as Flow;
-use TYPO3\Media\Domain\Model\Asset;
-use TYPO3\Media\Domain\Model\ImageVariant;
+use Neos\Media\Domain\Model\Asset;
+use Neos\Media\Domain\Model\ImageVariant;
 use TYPO3\TYPO3CR\Domain\Factory\NodeFactory;
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 

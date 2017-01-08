@@ -14,7 +14,7 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Eel\FlowQueryOperations;
 use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Eel\FlowQuery\Operations\AbstractOperation;
 use Neos\Flow\Annotations as Flow;
-use TYPO3\Media\Domain\Repository\AssetRepository;
+use Neos\Media\Domain\Repository\AssetRepository;
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 
 /**

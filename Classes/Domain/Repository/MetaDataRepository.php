@@ -12,7 +12,7 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Domain\Repository;
  */
 
 use Neos\Flow\Annotations as Flow;
-use TYPO3\Media\Domain\Model\Asset;
+use Neos\Media\Domain\Model\Asset;
 use TYPO3\TYPO3CR\Domain\Model\NodeData;
 use TYPO3\TYPO3CR\Domain\Model\Workspace;
 use TYPO3\TYPO3CR\Domain\Repository\NodeDataRepository;

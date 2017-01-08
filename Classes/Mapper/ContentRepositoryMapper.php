@@ -19,7 +19,7 @@ use Neos\Eel\CompilingEvaluator;
 use Neos\Eel\Exception as EelException;
 use Neos\Eel\Utility as EelUtility;
 use Neos\Flow\Annotations as Flow;
-use TYPO3\Media\Domain\Model\Asset;
+use Neos\Media\Domain\Model\Asset;
 use TYPO3\TYPO3CR\Domain\Model\NodeTemplate;
 use TYPO3\TYPO3CR\Domain\Model\NodeType;
 use TYPO3\TYPO3CR\Domain\Service\Context;

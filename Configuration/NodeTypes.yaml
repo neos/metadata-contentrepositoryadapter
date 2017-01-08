@@ -3,7 +3,7 @@
   abstract: true
   properties:
     assetObject:
-      type: TYPO3\Media\Domain\Model\AssetInterface
+      type: Neos\Media\Domain\Model\AssetInterface
       mapping: '${asset.assetObject}'
 'Neos.MetaData:Exif':
   abstract: true
