@@ -14,7 +14,7 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Aspect\Runtime;
 use Neos\MetaData\ContentRepositoryAdapter\Domain\Repository\MetaDataRepository;
 use Neos\MetaData\ContentRepositoryAdapter\Service\NodeService;
 use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\AOP\JoinPointInterface;
+use TYPO3\Flow\Aop\JoinPointInterface;
 use TYPO3\Flow\Reflection\ObjectAccess;
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 use TYPO3\TypoScript\Core\Runtime;
