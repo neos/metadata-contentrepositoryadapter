@@ -22,7 +22,7 @@ use Neos\Fusion\Core\Runtime;
 /**
  * @Flow\Aspect
  */
-class TypoScriptRuntimeAspect
+class FusionRuntimeAspect
 {
     /**
      * @Flow\Inject

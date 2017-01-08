@@ -5,8 +5,8 @@
     "require": {
         "php": "^5.3 || ^7",
         "neos/metadata": "*",
-        "typo3/typo3cr": "*",
-        "typo3/typoscript": "*"
+        "neos/content-repository": "*",
+        "neos/fusion": "*"
     },
     "suggest": {
         "neos/metadata-extractor": "Extracts meta data from Assets"

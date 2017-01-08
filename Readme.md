@@ -20,18 +20,16 @@ It provides three main features:
 ### Custom meta data node types
 Create a NodeType inheriting from `Neos.MetaData:AbstractMetaData`. Most of the time you will be inheriting from `Neos.MetaData:Asset`.
 
-    ```YAML
     'Vendor.Namespace:Type':
       superTypes:
         'Neos.MetaData:Asset': true
       properties:
         yourProperty:
           mapping: '${yourDto.yourProperty}'
-    ```
+
 
 Specify the media types for which your NodeType will be used for.
 
-    ```YAML
     Neos:
       MetaData:
         ContentRepositoryAdapter:
@@ -39,7 +37,7 @@ Specify the media types for which your NodeType will be used for.
             nodeTypeMappings:
               'type/subtype': 'Vendor.Namespace:Type'
               'type/otherSubtype': 'Vendor.Namespace:Type'
-    ```
+
 
 ### Eel
 Find the meta data of an asset - here of the node property `image`:
