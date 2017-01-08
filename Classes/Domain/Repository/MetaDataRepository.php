@@ -13,9 +13,9 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Domain\Repository;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Media\Domain\Model\Asset;
-use TYPO3\TYPO3CR\Domain\Model\NodeData;
-use TYPO3\TYPO3CR\Domain\Model\Workspace;
-use TYPO3\TYPO3CR\Domain\Repository\NodeDataRepository;
+use Neos\ContentRepository\Domain\Model\NodeData;
+use Neos\ContentRepository\Domain\Model\Workspace;
+use Neos\ContentRepository\Domain\Repository\NodeDataRepository;
 
 /**
  * @Flow\Scope("singleton")
