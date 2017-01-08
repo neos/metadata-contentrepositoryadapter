@@ -8,7 +8,7 @@
 'Neos.MetaData:Exif':
   abstract: true
   superTypes:
-    'Neos.MetaData:AbstractMetaData': '1'
+    'Neos.MetaData:AbstractMetaData': true
   ui:
     label: EXIF
   properties:
@@ -535,7 +535,7 @@
 'Neos.MetaData:Iptc':
   abstract: true
   superTypes:
-    'Neos.MetaData:AbstractMetaData': '1'
+    'Neos.MetaData:AbstractMetaData': true
   ui:
     label: IPTC
   properties:
@@ -702,7 +702,7 @@
           message: 'A shorthand reference for the item. Title provides a short human readable name which can be a text and/or numeric reference. It is not the same as Headline.'
 'Neos.MetaData:Asset':
   superTypes:
-    'Neos.MetaData:AbstractMetaData': '1'
+    'Neos.MetaData:AbstractMetaData': true
   properties:
     originalFileName:
       type: string
@@ -721,9 +721,9 @@
       mapping: '${asset.Collections}'
 'Neos.MetaData:Image':
   superTypes:
-    'Neos.MetaData:Asset': '1'
-    'Neos.MetaData:Exif': '1'
-    'Neos.MetaData:Iptc': '1'
+    'Neos.MetaData:Asset': true
+    'Neos.MetaData:Exif': true
+    'Neos.MetaData:Iptc': true
   properties:
     title:
       mapping: '${asset.Title || iptc.Title}'
