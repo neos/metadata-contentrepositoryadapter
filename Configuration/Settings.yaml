@@ -1,29 +1,28 @@
+
 Neos:
   MetaData:
     ContentRepositoryAdapter:
       mapping:
         defaultEelContext:
-          String: 'Neos\Eel\Helper\StringHelper'
-          Array: 'Neos\Eel\Helper\ArrayHelper'
-          Date: 'Neos\Eel\Helper\DateHelper'
+          String: Neos\Eel\Helper\StringHelper
+          Array: Neos\Eel\Helper\ArrayHelper
+          Date: Neos\Eel\Helper\DateHelper
         defaultNodeType: 'Neos.MetaData:Asset'
         nodeTypeMappings:
-          'application/octet-stream': 'Neos.MetaData:Image'
-          'application/x-shockwave-flash': 'Neos.MetaData:Image'
-          'image/bmp': 'Neos.MetaData:Image'
-          'image/gif': 'Neos.MetaData:Image'
-          'image/iff': 'Neos.MetaData:Image'
-          'image/jp2': 'Neos.MetaData:Image'
-          'image/jpeg': 'Neos.MetaData:Image'
-          'image/png': 'Neos.MetaData:Image'
-          'image/psd': 'Neos.MetaData:Image'
-          'image/tiff': 'Neos.MetaData:Image'
-          'image/vnd.microsoft.icon': 'Neos.MetaData:Image'
-          'image/vnd.wap.wbmp': 'Neos.MetaData:Image'
-          'image/xbm': 'Neos.MetaData:Image'
-          'video/jpeg': 'Neos.MetaData:Image'
-
-TYPO3:
-  TypoScript:
+          application/octet-stream: 'Neos.MetaData:Image'
+          application/x-shockwave-flash: 'Neos.MetaData:Image'
+          image/bmp: 'Neos.MetaData:Image'
+          image/gif: 'Neos.MetaData:Image'
+          image/iff: 'Neos.MetaData:Image'
+          image/jp2: 'Neos.MetaData:Image'
+          image/jpeg: 'Neos.MetaData:Image'
+          image/png: 'Neos.MetaData:Image'
+          image/psd: 'Neos.MetaData:Image'
+          image/tiff: 'Neos.MetaData:Image'
+          image/vnd.microsoft.icon: 'Neos.MetaData:Image'
+          image/vnd.wap.wbmp: 'Neos.MetaData:Image'
+          image/xbm: 'Neos.MetaData:Image'
+          video/jpeg: 'Neos.MetaData:Image'
+  Fusion:
     defaultContext:
-      MetaData : 'Neos\MetaData\ContentRepositoryAdapter\Eel\Helper\MetaDataHelper'
+      MetaData: Neos\MetaData\ContentRepositoryAdapter\Eel\Helper\MetaDataHelper

@@ -17,7 +17,7 @@ use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Aop\JoinPointInterface;
 use Neos\Utility\ObjectAccess;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
-use TYPO3\TypoScript\Core\Runtime;
+use Neos\Fusion\Core\Runtime;
 
 /**
  * @Flow\Aspect
@@ -32,7 +32,7 @@ class TypoScriptRuntimeAspect
 
     /**
      * @param JoinPointInterface $joinPoint
-     * @Flow\Before("method(TYPO3\TypoScript\Core\Runtime->pushContextArray())")
+     * @Flow\Before("method(Neos\Fusion\Core\Runtime->pushContextArray())")
      *
      * @return void
      */
@@ -49,7 +49,7 @@ class TypoScriptRuntimeAspect
 
     /**
      * @param JoinPointInterface $joinPoint
-     * @Flow\AfterReturning("method(TYPO3\TypoScript\Core\Runtime->pushContext(key == 'node'))")
+     * @Flow\AfterReturning("method(Neos\Fusion\Core\Runtime->pushContext(key == 'node'))")
      *
      * @return void
      */
