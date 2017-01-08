@@ -18,7 +18,7 @@ use Neos\MetaData\Mapper\MetaDataMapperInterface;
 use TYPO3\Eel\CompilingEvaluator;
 use TYPO3\Eel\Exception as EelException;
 use TYPO3\Eel\Utility as EelUtility;
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 use TYPO3\Media\Domain\Model\Asset;
 use TYPO3\TYPO3CR\Domain\Model\NodeTemplate;
 use TYPO3\TYPO3CR\Domain\Model\NodeType;

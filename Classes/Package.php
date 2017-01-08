@@ -3,8 +3,8 @@ namespace Neos\MetaData\ContentRepositoryAdapter;
 
 use Neos\MetaData\ContentRepositoryAdapter\Mapper\ContentRepositoryMapper;
 use Neos\MetaData\MetaDataManager;
-use TYPO3\Flow\Core\Bootstrap;
-use TYPO3\Flow\Package\Package as BasePackage;
+use Neos\Flow\Core\Bootstrap;
+use Neos\Flow\Package\Package as BasePackage;
 
 class Package extends BasePackage
 {
