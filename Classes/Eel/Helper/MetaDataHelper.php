@@ -12,7 +12,7 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Eel\Helper;
  */
 
 use Neos\MetaData\ContentRepositoryAdapter\Domain\Repository\MetaDataRepository;
-use TYPO3\Eel\ProtectedContextAwareInterface;
+use Neos\Eel\ProtectedContextAwareInterface;
 use Neos\Flow\Annotations as Flow;
 use TYPO3\Media\Domain\Model\Asset;
 use TYPO3\Media\Domain\Model\ImageVariant;
