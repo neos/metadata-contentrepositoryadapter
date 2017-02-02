@@ -27,14 +27,14 @@ class GetAssetsOperation extends AbstractOperation
      *
      * @var string
      */
-    static protected $shortName = 'getAssets';
+    protected static $shortName = 'getAssets';
 
     /**
      * {@inheritdoc}
      *
      * @var integer
      */
-    static protected $priority = 100;
+    protected static $priority = 100;
 
     /**
      * @var boolean
