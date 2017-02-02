@@ -11,11 +11,11 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Domain\Repository;
  * source code.
  */
 
-use Neos\Flow\Annotations as Flow;
-use Neos\Media\Domain\Model\Asset;
 use Neos\ContentRepository\Domain\Model\NodeData;
 use Neos\ContentRepository\Domain\Model\Workspace;
 use Neos\ContentRepository\Domain\Repository\NodeDataRepository;
+use Neos\Flow\Annotations as Flow;
+use Neos\Media\Domain\Model\Asset;
 
 /**
  * @Flow\Scope("singleton")

@@ -11,21 +11,21 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Mapper;
  * source code.
  */
 
-use Neos\MetaData\ContentRepositoryAdapter\Domain\Repository\MetaDataRepository;
-use Neos\MetaData\ContentRepositoryAdapter\Service\NodeService;
-use Neos\MetaData\Domain\Collection\MetaDataCollection;
-use Neos\MetaData\Mapper\MetaDataMapperInterface;
-use Neos\Eel\CompilingEvaluator;
-use Neos\Eel\Exception as EelException;
-use Neos\Eel\Utility as EelUtility;
-use Neos\Flow\Annotations as Flow;
-use Neos\Media\Domain\Model\Asset;
 use Neos\ContentRepository\Domain\Model\NodeTemplate;
 use Neos\ContentRepository\Domain\Model\NodeType;
 use Neos\ContentRepository\Domain\Service\Context;
 use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
 use Neos\ContentRepository\Domain\Service\NodeTypeManager;
 use Neos\ContentRepository\Exception\NodeTypeNotFoundException;
+use Neos\Eel\CompilingEvaluator;
+use Neos\Eel\Exception as EelException;
+use Neos\Eel\Utility as EelUtility;
+use Neos\Flow\Annotations as Flow;
+use Neos\Media\Domain\Model\Asset;
+use Neos\MetaData\ContentRepositoryAdapter\Domain\Repository\MetaDataRepository;
+use Neos\MetaData\ContentRepositoryAdapter\Service\NodeService;
+use Neos\MetaData\Domain\Collection\MetaDataCollection;
+use Neos\MetaData\Mapper\MetaDataMapperInterface;
 
 /**
  * @Flow\Scope("singleton")
