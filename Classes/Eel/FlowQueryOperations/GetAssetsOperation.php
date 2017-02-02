@@ -11,11 +11,11 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Eel\FlowQueryOperations;
  * source code.
  */
 
+use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Eel\FlowQuery\Operations\AbstractOperation;
 use Neos\Flow\Annotations as Flow;
 use Neos\Media\Domain\Repository\AssetRepository;
-use Neos\ContentRepository\Domain\Model\NodeInterface;
 
 /**
  * EEL operation to get the assets from meta data nodes

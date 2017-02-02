@@ -11,13 +11,13 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Eel\Helper;
  * source code.
  */
 
-use Neos\MetaData\ContentRepositoryAdapter\Domain\Repository\MetaDataRepository;
+use Neos\ContentRepository\Domain\Factory\NodeFactory;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\Eel\ProtectedContextAwareInterface;
 use Neos\Flow\Annotations as Flow;
 use Neos\Media\Domain\Model\Asset;
 use Neos\Media\Domain\Model\ImageVariant;
-use Neos\ContentRepository\Domain\Factory\NodeFactory;
-use Neos\ContentRepository\Domain\Model\NodeInterface;
+use Neos\MetaData\ContentRepositoryAdapter\Domain\Repository\MetaDataRepository;
 
 /**
  * EEL operation to get the meta data of an asset

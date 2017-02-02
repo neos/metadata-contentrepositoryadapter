@@ -11,13 +11,13 @@ namespace Neos\MetaData\ContentRepositoryAdapter\Aspect\Runtime;
  * source code.
  */
 
-use Neos\MetaData\ContentRepositoryAdapter\Domain\Repository\MetaDataRepository;
-use Neos\MetaData\ContentRepositoryAdapter\Service\NodeService;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Aop\JoinPointInterface;
-use Neos\Utility\ObjectAccess;
-use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\Fusion\Core\Runtime;
+use Neos\MetaData\ContentRepositoryAdapter\Domain\Repository\MetaDataRepository;
+use Neos\MetaData\ContentRepositoryAdapter\Service\NodeService;
+use Neos\Utility\ObjectAccess;
 
 /**
  * @Flow\Aspect

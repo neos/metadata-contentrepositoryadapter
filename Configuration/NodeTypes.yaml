@@ -1,10 +1,10 @@
-
 'Neos.MetaData:AbstractMetaData':
   abstract: true
   properties:
     assetObject:
       type: Neos\Media\Domain\Model\AssetInterface
       mapping: '${asset.assetObject}'
+
 'Neos.MetaData:Exif':
   abstract: true
   superTypes:
@@ -532,6 +532,7 @@
         label: 'GPS Horizontal Positioning Error'
         help:
           message: 'Horizontal positioning errors in meters.'
+
 'Neos.MetaData:Iptc':
   abstract: true
   superTypes:
@@ -700,6 +701,7 @@
         label: Title
         help:
           message: 'A shorthand reference for the item. Title provides a short human readable name which can be a text and/or numeric reference. It is not the same as Headline.'
+
 'Neos.MetaData:Asset':
   superTypes:
     'Neos.MetaData:AbstractMetaData': true
@@ -719,6 +721,7 @@
     collections:
       type: array
       mapping: '${asset.Collections}'
+
 'Neos.MetaData:Image':
   superTypes:
     'Neos.MetaData:Asset': true

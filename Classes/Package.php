@@ -1,10 +1,10 @@
 <?php
 namespace Neos\MetaData\ContentRepositoryAdapter;
 
-use Neos\MetaData\ContentRepositoryAdapter\Mapper\ContentRepositoryMapper;
-use Neos\MetaData\MetaDataManager;
 use Neos\Flow\Core\Bootstrap;
 use Neos\Flow\Package\Package as BasePackage;
+use Neos\MetaData\ContentRepositoryAdapter\Mapper\ContentRepositoryMapper;
+use Neos\MetaData\MetaDataManager;
 
 class Package extends BasePackage
 {
