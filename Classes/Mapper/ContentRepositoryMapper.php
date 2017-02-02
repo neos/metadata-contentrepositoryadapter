@@ -94,6 +94,12 @@ class ContentRepositoryMapper implements MetaDataMapperInterface
      */
     public function mapMetaData(Asset $asset, MetaDataCollection $metaDataCollection)
     {
+        $this->metaDataRepository->removeByAsset($asset, $this->context->getWorkspace());
+        $this->metaDataRepository->persistEntities();
+        if ($asset->getResource()->isDeleted()) {
+            return;
+        }
+
         if (isset($this->settings['nodeTypeMappings'][$asset->getMediaType()])) {
             $nodeTypeName = $this->settings['nodeTypeMappings'][$asset->getMediaType()];
         } else {
@@ -105,9 +111,6 @@ class ContentRepositoryMapper implements MetaDataMapperInterface
         $assetNodeTemplate->setNodeType($nodeType);
         $assetNodeTemplate->setName($asset->getIdentifier());
         $this->mapMetaDataToNodeData($assetNodeTemplate, $nodeType, $metaDataCollection);
-
-        $this->metaDataRepository->removeByAsset($asset, $this->context->getWorkspace());
-        $this->metaDataRepository->persistEntities();
         $this->nodeService->findOrCreateMetaDataRootNode($this->context)->createNodeFromTemplate($assetNodeTemplate);
     }
 
