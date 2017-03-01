@@ -1,6 +1,7 @@
 Neos:
   MetaData:
     ContentRepositoryAdapter:
+      overwriteExisting: true
       mapping:
         defaultEelContext:
           String: Neos\Eel\Helper\StringHelper

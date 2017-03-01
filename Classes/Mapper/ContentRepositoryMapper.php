@@ -77,7 +77,13 @@ class ContentRepositoryMapper implements MetaDataMapperInterface
      * @Flow\InjectConfiguration(package="Neos.MetaData.ContentRepositoryAdapter", path="mapping")
      * @var array
      */
-    protected $settings;
+    protected $mappingConfiguration;
+
+    /**
+     * @Flow\InjectConfiguration(package="Neos.MetaData.ContentRepositoryAdapter", path="overwriteExisting")
+     * @var array
+     */
+    protected $overwriteExisting;
 
     public function initializeObject()
     {
@@ -94,16 +100,24 @@ class ContentRepositoryMapper implements MetaDataMapperInterface
      */
     public function mapMetaData(Asset $asset, MetaDataCollection $metaDataCollection)
     {
-        $this->metaDataRepository->removeByAsset($asset, $this->context->getWorkspace());
-        $this->metaDataRepository->persistEntities();
-        if ($asset->getResource()->isDeleted()) {
+        if ($this->overwriteExisting) {
+            $this->metaDataRepository->removeByAsset($asset, $this->context->getWorkspace());
+            $this->metaDataRepository->persistEntities();
+            if ($asset->getResource()->isDeleted()) {
+                return;
+            }
+        } elseif ($this->metaDataRepository->findOneByAsset($asset, $this->context->getWorkspace()) !== null) {
+            if ($asset->getResource()->isDeleted()) {
+                $this->metaDataRepository->removeByAsset($asset, $this->context->getWorkspace());
+                $this->metaDataRepository->persistEntities();
+            }
             return;
         }
 
-        if (isset($this->settings['nodeTypeMappings'][$asset->getMediaType()])) {
-            $nodeTypeName = $this->settings['nodeTypeMappings'][$asset->getMediaType()];
+        if (isset($this->mappingConfiguration['nodeTypeMappings'][$asset->getMediaType()])) {
+            $nodeTypeName = $this->mappingConfiguration['nodeTypeMappings'][$asset->getMediaType()];
         } else {
-            $nodeTypeName = $this->settings['defaultNodeType'];
+            $nodeTypeName = $this->mappingConfiguration['defaultNodeType'];
         }
         $nodeType = $this->nodeTypeManager->getNodeType($nodeTypeName);
 
@@ -124,7 +138,7 @@ class ContentRepositoryMapper implements MetaDataMapperInterface
     protected function mapMetaDataToNodeData(NodeTemplate $nodeData, NodeType $nodeType, MetaDataCollection $metaDataCollection)
     {
         if ($this->defaultContextVariables === null) {
-            $this->defaultContextVariables = EelUtility::getDefaultContextVariables($this->settings['defaultEelContext']);
+            $this->defaultContextVariables = EelUtility::getDefaultContextVariables($this->mappingConfiguration['defaultEelContext']);
         }
 
         $contextVariables = array_merge($this->defaultContextVariables, $metaDataCollection->toArray());
