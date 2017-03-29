@@ -1,8 +1,8 @@
+[![Latest Stable Version](https://poser.pugx.org/neos/metadata-contentrepositoryadapter/v/stable)](https://packagist.org/packages/neos/metadata-contentrepositoryadapter) [![Total Downloads](https://poser.pugx.org/neos/metadata-contentrepositoryadapter/downloads)](https://packagist.org/packages/neos/metadata-contentrepositoryadapter) [![License](https://poser.pugx.org/neos/metadata-contentrepositoryadapter/license)](https://packagist.org/packages/neos/metadata-contentrepositoryadapter)
+
 # Neos MetaData Content Repository Adapter
 
 This package handles the mapping of meta data DTOs to the Neos Content Repository.
-
-**Note: This package is work in progress. The class structure and interfaces may change a lot over time. The package is not meant for productive use.**
 
 It provides three main features:
 
