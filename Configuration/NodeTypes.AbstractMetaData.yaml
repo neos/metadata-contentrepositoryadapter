@@ -1,0 +1,6 @@
+'Neos.MetaData:AbstractMetaData':
+  abstract: true
+  properties:
+    assetObject:
+      type: Neos\Media\Domain\Model\AssetInterface
+      mapping: '${asset.assetObject}'

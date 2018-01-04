@@ -1,0 +1,8 @@
+'Neos.MetaData:Image':
+  superTypes:
+    'Neos.MetaData:Asset': true
+    'Neos.MetaData:Exif': true
+    'Neos.MetaData:Iptc': true
+  properties:
+    title:
+      mapping: '${asset.Title || iptc.Title}'

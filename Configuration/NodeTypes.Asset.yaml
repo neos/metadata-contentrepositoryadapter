@@ -1,0 +1,19 @@
+'Neos.MetaData:Asset':
+  superTypes:
+    'Neos.MetaData:AbstractMetaData': true
+  properties:
+    originalFileName:
+      type: string
+      mapping: '${asset.FileName}'
+    tags:
+      type: array
+      mapping: '${asset.Tags}'
+    title:
+      type: string
+      mapping: '${asset.Title}'
+    caption:
+      type: string
+      mapping: '${asset.Caption}'
+    collections:
+      type: array
+      mapping: '${asset.Collections}'
