@@ -39,8 +39,7 @@ class FusionRuntimeAspect
     public function extendContextArrayWithMetaDataRootNode(JoinPointInterface $joinPoint)
     {
         $contextArray = $joinPoint->getMethodArgument('contextArray');
-        if (isset($contextArray['node'])) {
-            /** @var NodeInterface $node */
+        if (isset($contextArray['node']) && $contextArray['node'] instanceof NodeInterface) {
             $node = $contextArray['node'];
             $contextArray[MetaDataRepository::METADATA_ROOT_NODE_NAME] = $this->nodeService->findOrCreateMetaDataRootNode($node->getContext());
             $joinPoint->setMethodArgument('contextArray', $contextArray);
