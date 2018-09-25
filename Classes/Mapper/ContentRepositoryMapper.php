@@ -126,6 +126,7 @@ class ContentRepositoryMapper implements MetaDataMapperInterface
         $assetNodeTemplate->setName($asset->getIdentifier());
         $this->mapMetaDataToNodeData($assetNodeTemplate, $nodeType, $metaDataCollection);
         $this->nodeService->findOrCreateMetaDataRootNode($this->context)->createNodeFromTemplate($assetNodeTemplate);
+        $this->metaDataRepository->persistEntities();
     }
 
     /**
