@@ -3,7 +3,7 @@
     "description": "Maps asset meta data to CR nodes",
     "type": "neos-package",
     "require": {
-        "php": "^8.0",
+        "php": "^7.4 || ^8.0",
         "neos/content-repository": "^3.0 || ^4.0 || ^5.0 || ^7.0 || ^8.0 || dev-master",
         "neos/eel": "^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0 || dev-master",
         "neos/flow": "^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0 || dev-master",
